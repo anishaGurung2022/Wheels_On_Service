@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:wheels_on_service/utils/shared_prefs.dart';
-import 'package:wheels_on_service/views/pages/loader.dart';
+import 'package:wheels_on_service/controller/authentication_controller.dart';
 
 class TabThree extends StatelessWidget {
-  final AuthService authService = AuthService();
+  final authentication = Get.find<Authentication>();
   TabThree({Key? key}) : super(key: key);
 
   @override
@@ -23,7 +22,6 @@ class TabThree extends StatelessWidget {
   }
 
   logout() async {
-    await authService.removeToken();
-    Get.offAll(const Loader());
+    await authentication.logout();
   }
 }

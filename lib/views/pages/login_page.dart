@@ -10,7 +10,8 @@ class LoginPage extends StatelessWidget {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final formKey = GlobalKey<FormState>();
-  final authentication = Get.put(Authentication());
+  // final authentication = Get.put(Authentication());
+  final authentication = Get.find<Authentication>();
   final AuthService authService = AuthService();
   LoginPage({Key? key}) : super(key: key);
 

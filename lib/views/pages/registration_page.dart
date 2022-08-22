@@ -13,7 +13,7 @@ class RegistrationPage extends StatelessWidget {
   final usernameController = TextEditingController();
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
-  final authentication = Get.put(Authentication());
+  final authentication = Get.find<Authentication>();
   final formKey = GlobalKey<FormState>();
   RegistrationPage({Key? key}) : super(key: key);
 
