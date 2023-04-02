@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wheels_on_service/utils/constants.dart';
 
 class MyButton extends StatelessWidget {
   final onTap;
@@ -15,17 +16,18 @@ class MyButton extends StatelessWidget {
         child: Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(8),
-              color: const Color.fromARGB(255, 26, 44, 48),
+              color: primaryColor,
             ),
-            width: 150,
+            width: 600,
+            height: 50,
             child: Center(
               child: Padding(
                 padding: const EdgeInsets.all(10),
                 child: Text(buttonName,
                     style: const TextStyle(
-                      color: Color.fromARGB(255, 150, 218, 231),
-                      fontSize: 20,
-                    )),
+                        color: backgroundColor,
+                        fontSize: 25,
+                        fontWeight: FontWeight.bold)),
               ),
             )),
       ),

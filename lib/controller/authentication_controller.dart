@@ -8,7 +8,6 @@ import 'package:wheels_on_service/views/pages/loader.dart';
 import 'package:wheels_on_service/views/pages/login_page.dart';
 
 class Authentication extends GetxController {
-  final _token = ''.obs;
   final authService = AuthService();
 
   login(data) async {
@@ -38,7 +37,8 @@ class Authentication extends GetxController {
     var url = Uri.parse(SIGNUP_API);
     var response = await http.post(url, body: data);
     if (response.statusCode == 200) {
-      var jsonResponse = jsonDecode(response.body) as Map<String, dynamic>;
+      var jsonResponse =
+          jsonDecode(json.encode(response.body)) as Map<String, dynamic>;
       if (jsonResponse["success"]) {
         Get.offAll(LoginPage());
         showMessage(

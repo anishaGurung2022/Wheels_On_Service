@@ -1,0 +1,90 @@
+// import 'dart:convert';
+
+// import 'package:flutter/material.dart';
+// import 'package:flutter_slidable/flutter_slidable.dart';
+// import 'package:get/get.dart';
+// import 'package:wheels_on_service/controller/cart_controller.dart';
+// import 'package:wheels_on_service/controller/order_controller.dart';
+// import 'package:wheels_on_service/utils/api.dart';
+// import 'package:wheels_on_service/views/components/add_to_cart_bottomsheet.dart';
+// import 'package:wheels_on_service/views/components/my_button.dart';
+
+// class CartPage extends StatelessWidget {
+//   final CartController cartController = Get.find<CartController>();
+//   final OrderController orderController = Get.put(OrderController());
+//   CartPage({Key? key}) : super(key: key);
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(title: const Text("Cart")),
+//       body: Padding(
+//         padding: const EdgeInsets.all(8.0),
+//         child: Column(
+//           children: [
+//             Expanded(
+//               child: Obx(() => Column(
+//                     children: cartController.cart.values
+//                         .map((product) => cartDetail(product))
+//                         .toList(),
+//                   )),
+//             ),
+//             Container(
+//                 child: Obx(() => MyButton(
+//                     onTap: () {
+//                       var data = {
+//                         "total": 200.toString(),
+//                         "order_items": jsonEncode(cartController.cart.values
+//                             .map((e) => jsonEncode({
+//                                   "product_id": e.id,
+//                                   "quantity": e.quantity,
+//                                   "price": e.price,
+//                                   "name": e.name,
+//                                   "description": e.description
+//                                 }))
+//                             .toList())
+//                       };
+//                       orderController.place(data);
+//                     },
+//                     buttonName: "Checkout ${cartController.total}"))),
+//           ],
+//         ),
+//       ),
+//     );
+//   }
+
+//   Widget cartDetail(product) {
+//     return Slidable(
+//         endActionPane: ActionPane(
+//           motion: const ScrollMotion(),
+//           children: [
+//             SlidableAction(
+//               onPressed: (context) {
+//                 Get.bottomSheet(AddToCartBottomSheet(product: product));
+//               },
+//               backgroundColor: const Color(0xFF7BC043),
+//               foregroundColor: Colors.white,
+//               icon: Icons.edit,
+//               label: 'Edit',
+//             ),
+//             SlidableAction(
+//               onPressed: (context) {
+//                 cartController.remove(product);
+//               },
+//               backgroundColor: const Color(0xFF0392CF),
+//               foregroundColor: Colors.white,
+//               icon: Icons.delete,
+//               label: 'Delete',
+//             ),
+//           ],
+//         ),
+//         child: Row(
+//           mainAxisAlignment: MainAxisAlignment.spaceAround,
+//           children: [
+//             Image.network("$baseUrl/${product.image}", height: 100),
+//             Text(product.description),
+//             Text(product.quantity.toString()),
+//           ],
+//         ));
+//   }
+// }

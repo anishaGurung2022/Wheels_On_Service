@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../utils/shared_prefs.dart';
-import 'home_page.dart';
+import 'landing_page.dart';
 import 'login_page.dart';
 
 class Loader extends StatefulWidget {
@@ -23,7 +23,7 @@ class _LoaderState extends State<Loader> {
     await Future.delayed(const Duration(seconds: 3));
     var token = await authService.getToken();
     if (token != null) {
-      Get.offAll(const HomePage());
+      Get.offAll(const LandingPage());
     } else {
       Get.offAll(LoginPage());
     }
@@ -31,7 +31,7 @@ class _LoaderState extends State<Loader> {
 
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 150, 218, 231),
+      //backgroundColor: const Color.fromARGB(255, 150, 218, 231),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -47,7 +47,7 @@ class _LoaderState extends State<Loader> {
                       color: Colors.white,
                       shape: BoxShape.circle,
                       image: DecorationImage(
-                          image: AssetImage('assets/images/logo.png'),
+                          image: AssetImage('assets/images/logo.jpg'),
                           fit: BoxFit.fill)),
                 )),
           )

@@ -1,13 +1,14 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-
 import 'package:tabnavigator/tabnavigator.dart';
-import 'package:wheels_on_service/views/pages/homepageTabs/tab_one.dart';
-import 'package:wheels_on_service/views/pages/homepageTabs/tab_three.dart';
-import 'package:wheels_on_service/views/pages/homepageTabs/tab_two.dart';
+import 'package:wheels_on_service/utils/constants.dart';
+import 'package:wheels_on_service/views/pages/homepageTabs/bookings.dart';
+import 'package:wheels_on_service/views/pages/homepageTabs/home_page.dart';
+import 'package:wheels_on_service/views/pages/homepageTabs/profile.dart';
+import 'package:wheels_on_service/views/pages/homepageTabs/service_center.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({
+class LandingPage extends StatefulWidget {
+  const LandingPage({
     Key? key,
   }) : super(key: key);
 
@@ -15,7 +16,7 @@ class HomePage extends StatefulWidget {
   _MyHomePageState createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<HomePage> {
+class _MyHomePageState extends State<LandingPage> {
   final _tabController = StreamController<AppTab>.broadcast();
   final _initTab = AppTab.home;
 
@@ -23,13 +24,16 @@ class _MyHomePageState extends State<HomePage> {
 
   final _map = <AppTab, TabBuilder>{
     AppTab.home: () {
-      return const TabOne();
+      return HomePage();
     },
-    AppTab.colors: () {
-      return const TabTwo();
+    AppTab.serviceCenter: () {
+      return const ServiceCenterPage();
     },
-    AppTab.info: () {
-      return TabThree();
+    AppTab.booking: () {
+      return const BookingPage();
+    },
+    AppTab.profile: () {
+      return ProfilePage();
     }
   };
 
@@ -49,15 +53,19 @@ class _MyHomePageState extends State<HomePage> {
         return BottomNavigationBar(
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(
-              icon: Icon(Icons.home),
+              icon: Icon(Icons.home, color: primaryColor),
               label: 'Home',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.tab),
+              icon: Icon(Icons.car_repair_rounded, color: primaryColor),
+              label: 'Service Centers',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.tab, color: primaryColor),
               label: 'Bookings',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.person),
+              icon: Icon(Icons.person, color: primaryColor),
               label: 'Profile',
             ),
           ],
@@ -87,17 +95,20 @@ class AppTab extends TabType {
   const AppTab._(int value) : super(value);
 
   static const home = AppTab._(0);
-  static const colors = AppTab._(1);
-  static const info = AppTab._(2);
+  static const serviceCenter = AppTab._(1);
+  static const booking = AppTab._(2);
+  static const profile = AppTab._(3);
 
   static AppTab byValue(int value) {
     switch (value) {
       case 0:
         return home;
       case 1:
-        return colors;
+        return serviceCenter;
       case 2:
-        return info;
+        return booking;
+      case 3:
+        return profile;
       default:
         throw Exception('no tab for such value');
     }

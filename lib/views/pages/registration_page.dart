@@ -8,6 +8,7 @@ import 'package:wheels_on_service/views/pages/login_page.dart';
 
 class RegistrationPage extends StatelessWidget {
   final nameController = TextEditingController();
+  final addressController = TextEditingController();
   final contactNoController = TextEditingController();
   final emailController = TextEditingController();
   final usernameController = TextEditingController();
@@ -20,7 +21,6 @@ class RegistrationPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 150, 218, 231),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Form(
@@ -28,112 +28,172 @@ class RegistrationPage extends StatelessWidget {
               child: Column(
                 children: [
                   Container(
-                    height: 170,
-                    width: 170,
+                    height: 150,
+                    width: 250,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(100),
                     ),
                     child: Container(
                       decoration: const BoxDecoration(
                           color: Colors.white,
-                          shape: BoxShape.circle,
+                          shape: BoxShape.rectangle,
                           image: DecorationImage(
-                              image: AssetImage('assets/images/logo.png'),
+                              image: AssetImage('assets/images/logo.jpg'),
                               fit: BoxFit.fill)),
                     ),
                   ),
-                  const Text("Create a New Account",
+                  const Text("Sign In",
                       style: TextStyle(
-                          fontSize: 20,
+                          fontSize: 25,
                           fontWeight: FontWeight.bold,
-                          color: Color.fromARGB(255, 26, 44, 48))),
-                  MyField(
-                    controller: nameController,
-                    labelText: 'Name',
-                    myTextValidator: (value) {
-                      return null;
-                    },
+                          color: Color.fromARGB(255, 12, 12, 12))),
+                  const SizedBox(
+                    height: 10,
                   ),
-                  MyField(
-                    controller: contactNoController,
-                    labelText: 'Contact Number',
-                    myTextValidator: (value) {
-                      return null;
-                    },
-                  ),
-                  MyField(
-                    controller: emailController,
-                    labelText: 'Email',
-                    hintText: 'xyz@gmail.com',
-                    myTextValidator: (value) {
-                      if (!value.toString().contains("@gmail.com")) {
-                        return "Email is not valid";
-                      }
-                      return null;
-                    },
-                  ),
-                  MyField(
-                    controller: usernameController,
-                    labelText: 'Username',
-                    myTextValidator: (value) {
-                      return null;
-                    },
-                  ),
-                  MyField(
-                    controller: passwordController,
-                    labelText: 'Password',
-                    obscureText: true,
-                    myTextValidator: (value) {
-                      return null;
-                    },
-                  ),
-                  MyField(
-                    controller: confirmPasswordController,
-                    labelText: 'Confirm Password',
-                    obscureText: true,
-                    myTextValidator: (value) {
-                      return null;
-                    },
-                  ),
-                  MyButton(
-                      onTap: () {
-                        var isFormValid = formKey.currentState!.validate();
-                        if (passwordController.text ==
-                            confirmPasswordController.text) {
-                          if (isFormValid) {
-                            var data = {
-                              "name": nameController.text,
-                              "phone": contactNoController.text,
-                              "email": emailController.text,
-                              "userName": usernameController.text,
-                              "password": passwordController.text
-                            };
-                            authentication.signup(data);
-                          }
-                        } else {
-                          showMessage(
-                              title: "Error",
-                              message: "Incorrect Password",
-                              isSuccess: false);
-                        }
-                      },
-                      buttonName: "Submit"),
                   const Padding(
                     padding: EdgeInsets.all(8.0),
-                    child: Text(
-                      "Already have an account?",
-                      style: TextStyle(
-                          fontSize: 20, fontWeight: FontWeight.normal),
+                    child: Center(
+                      child: Text(
+                          "Please fill the details and Create an account",
+                          style: TextStyle(
+                              fontSize: 19,
+                              fontWeight: FontWeight.w400,
+                              color: Color.fromARGB(255, 151, 149, 149))),
                     ),
                   ),
-                  InkWell(
-                    onTap: () => Get.to(LoginPage()),
-                    child: const Text("Sign in",
-                        style: TextStyle(
-                          color: Color.fromARGB(255, 26, 44, 48),
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                        )),
+                  Padding(
+                    padding: const EdgeInsets.only(
+                        left: 10, bottom: 0, right: 10, top: 10),
+                    child: MyField(
+                      controller: nameController,
+                      labelText: 'Fullname',
+                      myTextValidator: (value) {
+                        return null;
+                      },
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(
+                        left: 10, bottom: 0, right: 10, top: 10),
+                    child: MyField(
+                      controller: addressController,
+                      labelText: 'Address',
+                      myTextValidator: (value) {
+                        return null;
+                      },
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(
+                        left: 10, bottom: 0, right: 10, top: 10),
+                    child: MyField(
+                      controller: contactNoController,
+                      labelText: 'Contact Number',
+                      myTextValidator: (value) {
+                        return null;
+                      },
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(
+                        left: 10, bottom: 0, right: 10, top: 10),
+                    child: MyField(
+                      controller: emailController,
+                      labelText: 'Email',
+                      hintText: 'xyz@gmail.com',
+                      myTextValidator: (value) {
+                        if (!value.toString().contains("@gmail.com")) {
+                          return "Email is not valid";
+                        }
+                        return null;
+                      },
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(
+                        left: 10, bottom: 0, right: 10, top: 10),
+                    child: MyField(
+                      controller: usernameController,
+                      labelText: 'Username',
+                      myTextValidator: (value) {
+                        return null;
+                      },
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(
+                        left: 10, bottom: 0, right: 10, top: 10),
+                    child: MyField(
+                      controller: passwordController,
+                      labelText: 'Password',
+                      obscureText: true,
+                      myTextValidator: (value) {
+                        return null;
+                      },
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(
+                        left: 10, bottom: 0, right: 10, top: 10),
+                    child: MyField(
+                      controller: confirmPasswordController,
+                      labelText: 'Confirm Password',
+                      obscureText: true,
+                      myTextValidator: (value) {
+                        return null;
+                      },
+                    ),
+                  ),
+                  SizedBox(
+                    width: 350,
+                    child: MyButton(
+                        onTap: () {
+                          var isFormValid = formKey.currentState!.validate();
+                          if (passwordController.text ==
+                              confirmPasswordController.text) {
+                            if (isFormValid) {
+                              var data = {
+                                "name": nameController.text,
+                                "phone": contactNoController.text,
+                                "address": addressController.text,
+                                "email": emailController.text,
+                                "userName": usernameController.text,
+                                "password": passwordController.text
+                              };
+                              authentication.signup(data);
+                              print(data);
+                            }
+                          } else {
+                            showMessage(
+                                title: "Error",
+                                message: "Incorrect Password",
+                                isSuccess: false);
+                          }
+                        },
+                        buttonName: "Submit"),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Text(
+                          "Already have an account?",
+                          style: TextStyle(
+                              fontSize: 18, fontWeight: FontWeight.normal),
+                        ),
+                      ),
+                      InkWell(
+                        onTap: () => Get.to(LoginPage()),
+                        child: const Text("Sign In",
+                            style: TextStyle(
+                              fontSize: 18,
+                              color: primaryColor,
+                              fontWeight: FontWeight.bold,
+                              decoration: TextDecoration.underline,
+                            )),
+                      ),
+                    ],
                   ),
                 ],
               )),
