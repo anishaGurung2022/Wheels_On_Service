@@ -26,7 +26,6 @@ class ServiceController extends GetxController {
       var jsonResponse = jsonDecode(response.body) as Map<String, dynamic>;
       if (jsonResponse["success"]) {
         var responseData = jsonResponse['data'];
-        print(response);
         for (var i = 0; i < responseData.length; i++) {
           services.add(Services.fromJson(responseData[i]));
         }

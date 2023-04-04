@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:wheels_on_service/controller/authentication_controller.dart';
+import 'package:wheels_on_service/controller/details_controller.dart';
+import 'package:wheels_on_service/model/customer_model.dart';
 import 'package:wheels_on_service/utils/constants.dart';
-import 'package:wheels_on_service/views/components/my_button.dart';
+//import 'package:wheels_on_service/views/components/my_button.dart';
+import 'package:wheels_on_service/views/components/profile_component.dart';
 
 class ProfilePage extends StatelessWidget {
   final authentication = Get.find<Authentication>();
+  final CustomerController customerController = Get.put(CustomerController());
   ProfilePage({super.key});
 
   @override
@@ -28,21 +32,11 @@ class ProfilePage extends StatelessWidget {
           ),
         ],
       ),
-      body: Column(
-        children: [
-          SizedBox(
-            width: 200,
-            child: MyButton(
-              buttonName: 'Logout',
-              onTap: () => logout(),
-            ),
-          ),
-        ],
-      ),
+      body: Obx(() => Wrap(
+          children: customerController.details.value
+              .map((Customer customerDetails) =>
+                  ProfileComponent(customer: customerDetails))
+              .toList())),
     );
-  }
-
-  logout() async {
-    await authentication.logout();
   }
 }

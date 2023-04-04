@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:wheels_on_service/model/service_model.dart';
 import 'package:wheels_on_service/utils/api.dart';
-import 'package:wheels_on_service/views/pages/homepageTabs/services.dart';
+import 'package:wheels_on_service/views/pages/homepageTabs/services_page.dart';
 
 class ServiceComponent extends StatelessWidget {
   final Services service;

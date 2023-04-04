@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 import 'package:wheels_on_service/model/service_model.dart';
 import 'package:wheels_on_service/utils/api.dart';
 import 'package:wheels_on_service/utils/constants.dart';
+import 'package:wheels_on_service/views/components/my_button.dart';
+import 'package:wheels_on_service/views/pages/homepageTabs/home_page.dart';
 
 class ServicesPage extends StatelessWidget {
   final Services service;
@@ -12,7 +14,7 @@ class ServicesPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("ServicesPage"),
+        title: Text(service.name),
         backgroundColor: primaryColor,
         actions: [
           Container(
@@ -76,18 +78,32 @@ class ServicesPage extends StatelessWidget {
                         ],
                       ),
                     ),
-                    const Text(
-                      "Description",
-                      style: TextStyle(
-                        fontSize: 20,
+                    Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Column(
+                        children: [
+                          const Align(
+                            alignment: Alignment.centerLeft,
+                            child: Text(
+                              "Description",
+                              style: TextStyle(
+                                fontSize: 20,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 15,
+                          ),
+                          Align(
+                            alignment: Alignment.centerLeft,
+                            child: Text(service.description,
+                                style: const TextStyle(
+                                    fontSize: 20,
+                                    color: Color.fromARGB(255, 143, 137, 137))),
+                          ),
+                        ],
                       ),
-                    ),
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(service.description,
-                          style:
-                              const TextStyle(fontSize: 20, color: Colors.red)),
-                    ),
+                    )
                   ],
                 ),
               ),
