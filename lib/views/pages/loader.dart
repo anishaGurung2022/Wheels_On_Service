@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:wheels_on_service/utils/constants.dart';
 import '../../utils/shared_prefs.dart';
 import 'landing_page.dart';
 import 'login_page.dart';
@@ -29,23 +30,24 @@ class _LoaderState extends State<Loader> {
     }
   }
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      //backgroundColor: const Color.fromARGB(255, 150, 218, 231),
+      backgroundColor: backgroundColor,
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Center(
             child: Container(
-                height: 140,
-                width: 140,
+                height: 150,
+                width: 250,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(100),
                 ),
                 child: Container(
                   decoration: const BoxDecoration(
                       color: Colors.white,
-                      shape: BoxShape.circle,
+                      //shape: BoxShape.circle,
                       image: DecorationImage(
                           image: AssetImage('assets/images/logo.jpg'),
                           fit: BoxFit.fill)),

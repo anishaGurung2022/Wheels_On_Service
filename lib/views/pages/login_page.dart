@@ -57,9 +57,9 @@ class LoginPage extends StatelessWidget {
                         ),
                         children: [
                           TextSpan(
-                            text: 'Welcome Back !',
+                            text: 'Welcome Back!',
                             style: TextStyle(
-                              fontSize: 35,
+                              fontSize: 30,
                               color: Color(0xff121212),
                               fontWeight: FontWeight.w700,
                             ),
@@ -84,10 +84,10 @@ class LoginPage extends StatelessWidget {
                   child: Align(
                     alignment: Alignment.topLeft,
                     child: Text(
-                      'Sign to your account',
+                      'Sign In to your account',
                       style: TextStyle(
                         fontFamily: 'Segoe UI',
-                        fontSize: 22,
+                        fontSize: 20,
                         color: Color.fromARGB(255, 151, 149, 149),
                         fontWeight: FontWeight.w400,
                         height: 2.8,
@@ -100,27 +100,35 @@ class LoginPage extends StatelessWidget {
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: MyField(
-                    controller: emailController,
-                    labelText: 'Email',
-                    myTextValidator: (value) {
-                      if (!value.toString().contains("@")) {
-                        return "Email is not valid";
-                      }
-                      return null;
-                    },
+                  child: SizedBox(
+                    width: 400,
+                    height: 70,
+                    child: MyField(
+                      controller: emailController,
+                      labelText: 'Email',
+                      myTextValidator: (value) {
+                        if (!value.toString().contains("@")) {
+                          return "Email is not valid";
+                        }
+                        return null;
+                      },
+                    ),
                   ),
                 ),
                 const SizedBox(height: 10),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: MyField(
-                    controller: passwordController,
-                    labelText: 'Password',
-                    obscureText: true,
-                    myTextValidator: (value) {
-                      return null;
-                    },
+                  child: SizedBox(
+                    width: 400,
+                    height: 70,
+                    child: MyField(
+                      controller: passwordController,
+                      labelText: 'Password',
+                      obscureText: true,
+                      myTextValidator: (value) {
+                        return null;
+                      },
+                    ),
                   ),
                 ),
                 const Padding(
@@ -129,10 +137,10 @@ class LoginPage extends StatelessWidget {
                   child: Align(
                     alignment: Alignment.bottomLeft,
                     child: Text(
-                      'forgot Password?',
+                      'Forgot Password?',
                       style: TextStyle(
                         fontFamily: 'Segoe UI',
-                        fontSize: 18,
+                        fontSize: 16,
                         color: Color(0xfff77931),
                         fontWeight: FontWeight.w700,
                         height: 3.5,
@@ -164,7 +172,7 @@ class LoginPage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     const Text("Don't have an account?",
-                        style: TextStyle(fontSize: 18, color: textColor)),
+                        style: TextStyle(fontSize: 15, color: textColor)),
                     InkWell(
                       onTap: () {
                         Get.to(RegistrationPage());
@@ -172,7 +180,7 @@ class LoginPage extends StatelessWidget {
                       child: const Text("Sign Up",
                           style: TextStyle(
                             color: primaryColor,
-                            fontSize: 18,
+                            fontSize: 15,
                             fontWeight: FontWeight.bold,
                             decoration: TextDecoration.underline,
                           )),

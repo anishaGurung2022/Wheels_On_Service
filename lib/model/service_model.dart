@@ -1,39 +1,40 @@
-// To parse this JSON data, do
-//
-//     final services = servicesFromJson(jsonString);
-
 import 'dart:convert';
 
-Services servicesFromJson(String str) => Services.fromJson(json.decode(str));
+List<Services?>? productFromJson(String str) => json.decode(str) == null
+    ? []
+    : List<Services?>.from(json.decode(str)!.map((x) => Services.fromJson(x)));
 
-String servicesToJson(Services data) => json.encode(data.toJson());
+String productToJson(List<Services?>? data) => json.encode(
+    data == null ? [] : List<dynamic>.from(data.map((x) => x!.toJson())));
 
 class Services {
   Services({
-    required this.id,
-    required this.name,
-    required this.description,
-    required this.price,
-    required this.categoryId,
-    required this.serviceCenterId,
-    required this.image,
+    this.id,
+    this.name,
+    this.description,
+    this.price,
+    this.category,
+    this.serviceCenter,
+    this.image,
+    this.quantity = 1,
   });
 
-  String id;
-  String name;
-  String description;
-  String price;
-  String categoryId;
-  String serviceCenterId;
-  String image;
+  String? id;
+  String? name;
+  String? description;
+  String? price;
+  String? category;
+  String? serviceCenter;
+  String? image;
+  int? quantity;
 
   factory Services.fromJson(Map<String, dynamic> json) => Services(
         id: json["id"],
         name: json["name"],
         description: json["description"],
         price: json["price"],
-        categoryId: json["category_id"],
-        serviceCenterId: json["serviceCenter_id"],
+        category: json["category"],
+        serviceCenter: json["serviceCenter"],
         image: json["image"],
       );
 
@@ -42,8 +43,8 @@ class Services {
         "name": name,
         "description": description,
         "price": price,
-        "category_id": categoryId,
-        "serviceCenter_id": serviceCenterId,
+        "category": category,
+        "serviceCenter": serviceCenter,
         "image": image,
       };
 }

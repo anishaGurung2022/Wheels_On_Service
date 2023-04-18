@@ -21,6 +21,7 @@ class RegistrationPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: backgroundColor,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Form(
@@ -42,106 +43,123 @@ class RegistrationPage extends StatelessWidget {
                               fit: BoxFit.fill)),
                     ),
                   ),
-                  const Text("Sign In",
+                  const Text("Create a New Account",
                       style: TextStyle(
-                          fontSize: 25,
+                          fontSize: 20,
                           fontWeight: FontWeight.bold,
                           color: Color.fromARGB(255, 12, 12, 12))),
                   const SizedBox(
                     height: 10,
                   ),
-                  const Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: Center(
-                      child: Text(
-                          "Please fill the details and Create an account",
-                          style: TextStyle(
-                              fontSize: 19,
-                              fontWeight: FontWeight.w400,
-                              color: Color.fromARGB(255, 151, 149, 149))),
+                  Padding(
+                    padding: const EdgeInsets.only(
+                        left: 10, bottom: 0, right: 10, top: 10),
+                    child: SizedBox(
+                      width: 400,
+                      height: 70,
+                      child: MyField(
+                        controller: nameController,
+                        labelText: 'Fullname',
+                        myTextValidator: (value) {
+                          return null;
+                        },
+                      ),
                     ),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(
                         left: 10, bottom: 0, right: 10, top: 10),
-                    child: MyField(
-                      controller: nameController,
-                      labelText: 'Fullname',
-                      myTextValidator: (value) {
-                        return null;
-                      },
+                    child: SizedBox(
+                      width: 400,
+                      height: 65,
+                      child: MyField(
+                        controller: addressController,
+                        labelText: 'Address',
+                        myTextValidator: (value) {
+                          return null;
+                        },
+                      ),
                     ),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(
                         left: 10, bottom: 0, right: 10, top: 10),
-                    child: MyField(
-                      controller: addressController,
-                      labelText: 'Address',
-                      myTextValidator: (value) {
-                        return null;
-                      },
+                    child: SizedBox(
+                      width: 400,
+                      height: 65,
+                      child: MyField(
+                        controller: contactNoController,
+                        labelText: 'Contact Number',
+                        myTextValidator: (value) {
+                          return null;
+                        },
+                      ),
                     ),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(
                         left: 10, bottom: 0, right: 10, top: 10),
-                    child: MyField(
-                      controller: contactNoController,
-                      labelText: 'Contact Number',
-                      myTextValidator: (value) {
-                        return null;
-                      },
+                    child: SizedBox(
+                      width: 400,
+                      height: 65,
+                      child: MyField(
+                        controller: emailController,
+                        labelText: 'Email',
+                        hintText: 'xyz@gmail.com',
+                        myTextValidator: (value) {
+                          if (!value.toString().contains("@gmail.com")) {
+                            return "Email is not valid";
+                          }
+                          return null;
+                        },
+                      ),
                     ),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(
                         left: 10, bottom: 0, right: 10, top: 10),
-                    child: MyField(
-                      controller: emailController,
-                      labelText: 'Email',
-                      hintText: 'xyz@gmail.com',
-                      myTextValidator: (value) {
-                        if (!value.toString().contains("@gmail.com")) {
-                          return "Email is not valid";
-                        }
-                        return null;
-                      },
+                    child: SizedBox(
+                      width: 400,
+                      height: 65,
+                      child: MyField(
+                        controller: usernameController,
+                        labelText: 'Username',
+                        myTextValidator: (value) {
+                          return null;
+                        },
+                      ),
                     ),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(
                         left: 10, bottom: 0, right: 10, top: 10),
-                    child: MyField(
-                      controller: usernameController,
-                      labelText: 'Username',
-                      myTextValidator: (value) {
-                        return null;
-                      },
+                    child: SizedBox(
+                      width: 400,
+                      height: 65,
+                      child: MyField(
+                        controller: passwordController,
+                        labelText: 'Password',
+                        obscureText: true,
+                        myTextValidator: (value) {
+                          return null;
+                        },
+                      ),
                     ),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(
                         left: 10, bottom: 0, right: 10, top: 10),
-                    child: MyField(
-                      controller: passwordController,
-                      labelText: 'Password',
-                      obscureText: true,
-                      myTextValidator: (value) {
-                        return null;
-                      },
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(
-                        left: 10, bottom: 0, right: 10, top: 10),
-                    child: MyField(
-                      controller: confirmPasswordController,
-                      labelText: 'Confirm Password',
-                      obscureText: true,
-                      myTextValidator: (value) {
-                        return null;
-                      },
+                    child: SizedBox(
+                      width: 400,
+                      height: 65,
+                      child: MyField(
+                        controller: confirmPasswordController,
+                        labelText: 'Confirm Password',
+                        obscureText: true,
+                        myTextValidator: (value) {
+                          return null;
+                        },
+                      ),
                     ),
                   ),
                   SizedBox(
@@ -180,14 +198,14 @@ class RegistrationPage extends StatelessWidget {
                         child: Text(
                           "Already have an account?",
                           style: TextStyle(
-                              fontSize: 18, fontWeight: FontWeight.normal),
+                              fontSize: 15, fontWeight: FontWeight.normal),
                         ),
                       ),
                       InkWell(
                         onTap: () => Get.to(LoginPage()),
                         child: const Text("Sign In",
                             style: TextStyle(
-                              fontSize: 18,
+                              fontSize: 15,
                               color: primaryColor,
                               fontWeight: FontWeight.bold,
                               decoration: TextDecoration.underline,

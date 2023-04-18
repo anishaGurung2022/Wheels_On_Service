@@ -5,7 +5,7 @@ import 'package:wheels_on_service/utils/constants.dart';
 import 'package:wheels_on_service/views/pages/homepageTabs/bookings.dart';
 import 'package:wheels_on_service/views/pages/homepageTabs/home_page.dart';
 import 'package:wheels_on_service/views/pages/homepageTabs/profile.dart';
-import 'package:wheels_on_service/views/pages/homepageTabs/service_center.dart';
+import 'package:wheels_on_service/views/pages/homepageTabs/services_page.dart';
 
 class LandingPage extends StatefulWidget {
   const LandingPage({
@@ -26,8 +26,8 @@ class _MyHomePageState extends State<LandingPage> {
     AppTab.home: () {
       return HomePage();
     },
-    AppTab.serviceCenter: () {
-      return const ServiceCenterPage();
+    AppTab.services: () {
+      return ServicesPage();
     },
     AppTab.booking: () {
       return const BookingPage();
@@ -53,20 +53,23 @@ class _MyHomePageState extends State<LandingPage> {
         return BottomNavigationBar(
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(
-              icon: Icon(Icons.home, color: primaryColor),
-              label: 'Home',
+                icon: Icon(Icons.home, color: Colors.white),
+                label: 'Home',
+                backgroundColor: primaryColor),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.car_repair_sharp, color: Colors.white),
+              label: 'Services',
+              backgroundColor: primaryColor,
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.car_repair_rounded, color: primaryColor),
-              label: 'Service Centers',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.tab, color: primaryColor),
+              icon: Icon(Icons.book_online_outlined, color: Colors.white),
               label: 'Bookings',
+              backgroundColor: primaryColor,
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.person, color: primaryColor),
+              icon: Icon(Icons.person, color: Colors.white),
               label: 'Profile',
+              backgroundColor: primaryColor,
             ),
           ],
           currentIndex: snapshot.hasData ? snapshot.data!.value : 0,
@@ -95,7 +98,7 @@ class AppTab extends TabType {
   const AppTab._(int value) : super(value);
 
   static const home = AppTab._(0);
-  static const serviceCenter = AppTab._(1);
+  static const services = AppTab._(1);
   static const booking = AppTab._(2);
   static const profile = AppTab._(3);
 
@@ -104,7 +107,7 @@ class AppTab extends TabType {
       case 0:
         return home;
       case 1:
-        return serviceCenter;
+        return services;
       case 2:
         return booking;
       case 3:

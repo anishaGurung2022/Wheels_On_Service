@@ -11,7 +11,8 @@ class KhaltiExampleApp extends StatelessWidget {
       length: 3,
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('KPG Example'),
+          title: const Text('Khalti Payment'),
+          backgroundColor: Colors.deepPurple,
           bottom: const TabBar(
             tabs: [
               Tab(text: 'Wallet Payment'),
@@ -64,6 +65,9 @@ class _WalletPaymentState extends State<WalletPayment> {
       child: ListView(
         padding: const EdgeInsets.all(16),
         children: [
+          const SizedBox(
+            height: 40,
+          ),
           TextFormField(
             validator: (v) => (v?.isEmpty ?? true) ? 'Required ' : null,
             decoration: const InputDecoration(
@@ -131,6 +135,14 @@ class _WalletPaymentState extends State<WalletPayment> {
                       transactionPin: _pinController.text,
                     ),
                   );
+                  showDialog(
+                      context: (context),
+                      builder: (context) {
+                        return AlertDialog(
+                          title: const Text("Payment Successfull"),
+                          content: Text('Verification Token: ${model.token}'),
+                        );
+                      });
 
                   debugPrint(model.toString());
                 } catch (e) {
@@ -140,7 +152,10 @@ class _WalletPaymentState extends State<WalletPayment> {
                 }
               }
             },
-            child: const Text('PAY Rs. 10'),
+            child: const Text('PAY Rs. 100'),
+            style: ElevatedButton.styleFrom(
+              primary: Colors.deepPurple,
+            ),
           ),
         ],
       ),
