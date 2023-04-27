@@ -29,7 +29,7 @@ class ServiceController extends GetxController {
         for (var i = 0; i < responseData.length; i++) {
           services.add(Services.fromJson(responseData[i]));
         }
-        showMessage(title: "Success", message: jsonResponse["message"]);
+        //showMessage(title: "Success", message: jsonResponse["message"]);
       } else {
         showMessage(
             title: "Error", message: jsonResponse["message"], isSuccess: false);

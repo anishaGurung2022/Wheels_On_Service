@@ -88,4 +88,5 @@ class ServicesSearch extends SearchDelegate<Services> {
   // void onSubmitted(String query) {
   //   // TODO: Implement onSubmitted functionality here.
   // }
+
 }

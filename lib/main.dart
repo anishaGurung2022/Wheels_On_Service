@@ -4,6 +4,7 @@ import 'package:khalti/khalti.dart';
 import 'package:wheels_on_service/controller/authentication_controller.dart';
 import 'package:wheels_on_service/controller/cart_controller.dart';
 import 'package:wheels_on_service/controller/category_controller.dart';
+import 'package:wheels_on_service/controller/city_controller.dart';
 import 'package:wheels_on_service/controller/service_center_controller.dart';
 import 'package:wheels_on_service/controller/service_controller.dart';
 import 'package:wheels_on_service/views/pages/loader.dart';
@@ -17,11 +18,12 @@ Future<void> main() async {
       enabledDebugging: false);
   Get.put(Authentication()); //fetches token
   Get.put(CategoryController()); // fetches categories
+  Get.put(CitiesController());
   Get.put(ServiceController());
   Get.put(ServiceCenterController());
   Get.put(CartController());
-  runApp(GetMaterialApp(
-    home: LoginPage(),
+  runApp(const GetMaterialApp(
+    home: Loader(),
     debugShowCheckedModeBanner: false,
   ));
 }

@@ -30,7 +30,7 @@ class _MyHomePageState extends State<LandingPage> {
       return ServicesPage();
     },
     AppTab.booking: () {
-      return const BookingPage();
+      return BookingPage();
     },
     AppTab.profile: () {
       return ProfilePage();

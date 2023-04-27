@@ -43,7 +43,7 @@ class ServiceComponent extends StatelessWidget {
                           child: Text(
                             service.name!,
                             style: const TextStyle(
-                              fontSize: 15,
+                              fontSize: 12,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
@@ -53,7 +53,7 @@ class ServiceComponent extends StatelessWidget {
                           child: Text(
                             "Rs.${service.price}",
                             style: const TextStyle(
-                                fontSize: 15,
+                                fontSize: 12,
                                 fontWeight: FontWeight.bold,
                                 color: primaryColor),
                           ),

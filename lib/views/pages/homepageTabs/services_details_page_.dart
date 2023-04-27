@@ -144,7 +144,7 @@ class ServiceDetailsPage extends StatelessWidget {
                                       onTap: () {
                                         cartController.add(services: service);
                                       },
-                                      buttonName: 'Add to Cart',
+                                      buttonName: 'Book',
                                     ),
                                   ),
                                   // SizedBox(

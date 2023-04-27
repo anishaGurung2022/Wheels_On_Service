@@ -37,10 +37,13 @@ class ServiceCenterComponent extends StatelessWidget {
                     Expanded(
                         child:
                             Image.network("$baseUrl/${serviceCenter.image}")),
+                    const SizedBox(
+                      height: 5,
+                    ),
                     Text(
                       serviceCenter.name,
                       style: const TextStyle(
-                        fontSize: 15,
+                        fontSize: 12,
                         fontWeight: FontWeight.bold,
                       ),
                     ),

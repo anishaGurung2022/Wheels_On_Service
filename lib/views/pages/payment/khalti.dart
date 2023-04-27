@@ -1,9 +1,18 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:khalti/khalti.dart';
 import 'package:url_launcher/url_launcher.dart' as url_launcher;
+import 'package:wheels_on_service/controller/booking_controller.dart';
+import 'package:wheels_on_service/controller/cart_controller.dart';
+import 'package:wheels_on_service/utils/constants.dart';
+import 'package:wheels_on_service/views/pages/homepageTabs/home_page.dart';
+import 'package:wheels_on_service/views/pages/landing_page.dart';
 
 class KhaltiExampleApp extends StatelessWidget {
-  const KhaltiExampleApp({Key? key}) : super(key: key);
+  KhaltiExampleApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -41,6 +50,8 @@ class WalletPayment extends StatefulWidget {
 }
 
 class _WalletPaymentState extends State<WalletPayment> {
+  final CartController cartController = Get.find<CartController>();
+  final BookingController bookingController = Get.put(BookingController());
   late final TextEditingController _mobileController, _pinController;
   final GlobalKey<FormState> _formKey = GlobalKey();
 
@@ -81,6 +92,7 @@ class _WalletPaymentState extends State<WalletPayment> {
               label: Text('Khalti MPIN'),
             ),
             controller: _pinController,
+            obscureText: true,
           ),
           const SizedBox(height: 24),
           ElevatedButton(
@@ -135,15 +147,27 @@ class _WalletPaymentState extends State<WalletPayment> {
                       transactionPin: _pinController.text,
                     ),
                   );
+                  var data = {
+                    "token": model.token.toString(),
+                    "cost": cartController.totalCosting.value,
+                    "booking_id": bookingController.bookingID.value,
+                    "payment_date": DateTime.now().toString()
+                  };
+                  bookingController.addPayment(jsonEncode(data));
+                  cartController.clearCart;
+                  Get.offAll(const LandingPage());
                   showDialog(
                       context: (context),
                       builder: (context) {
-                        return AlertDialog(
-                          title: const Text("Payment Successfull"),
-                          content: Text('Verification Token: ${model.token}'),
+                        return const AlertDialog(
+                          title: Text(
+                            "Payment Successfull",
+                            style: TextStyle(color: primaryColor),
+                          ),
+
+                          //content: Text('Verification Token: ${model.token}'),
                         );
                       });
-
                   debugPrint(model.toString());
                 } catch (e) {
                   ScaffoldMessenger.maybeOf(context)?.showSnackBar(
@@ -152,7 +176,7 @@ class _WalletPaymentState extends State<WalletPayment> {
                 }
               }
             },
-            child: const Text('PAY Rs. 100'),
+            child: const Text('PAY Rs. 200'),
             style: ElevatedButton.styleFrom(
               primary: Colors.deepPurple,
             ),

@@ -25,10 +25,10 @@ class Authentication extends GetxController {
         //print(token);
         //details.getDetails(token);
         Get.offAll(const Loader());
-        showMessage(
-            title: "Success",
-            message: jsonResponse["message"],
-            isSuccess: true);
+        // showMessage(
+        //     title: "Success",
+        //     message: jsonResponse["message"],
+        //     isSuccess: true);
       } else {
         showMessage(
             title: "Error", message: jsonResponse["message"], isSuccess: false);
@@ -46,10 +46,10 @@ class Authentication extends GetxController {
       print(jsonResponse);
       if (jsonResponse["success"]) {
         Get.offAll(LoginPage());
-        showMessage(
-            title: "Success",
-            message: jsonResponse["message"],
-            isSuccess: true);
+        // showMessage(
+        //     title: "Success",
+        //     message: jsonResponse["message"],
+        //     isSuccess: true);
       } else {
         showMessage(
             title: "Error", message: jsonResponse["message"], isSuccess: false);
@@ -68,10 +68,10 @@ class Authentication extends GetxController {
       if (jsonResponse["success"]) {
         await authService.removeToken();
         Get.offAll(const Loader());
-        showMessage(
-            title: "Success",
-            message: jsonResponse["message"],
-            isSuccess: true);
+        // showMessage(
+        //     title: "Success",
+        //     message: jsonResponse["message"],
+        //     isSuccess: true);
       } else {
         showMessage(
             title: "Error", message: jsonResponse["message"], isSuccess: false);

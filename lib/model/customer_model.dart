@@ -18,6 +18,7 @@ class Customer {
     required this.userName,
     required this.password,
     required this.isAdmin,
+    required this.image,
   });
 
   String id;
@@ -28,6 +29,7 @@ class Customer {
   String userName;
   String password;
   String isAdmin;
+  String image;
 
   factory Customer.fromJson(Map<String, dynamic> json) => Customer(
         id: json["id"],
@@ -38,6 +40,7 @@ class Customer {
         userName: json["userName"],
         password: json["password"],
         isAdmin: json["isAdmin"],
+        image: json["image"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -49,5 +52,6 @@ class Customer {
         "userName": userName,
         "password": password,
         "isAdmin": isAdmin,
+        "image": image,
       };
 }

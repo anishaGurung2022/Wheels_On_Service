@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:wheels_on_service/controller/authentication_controller.dart';
+import 'package:wheels_on_service/form/edit_profile_form.dart';
 import 'package:wheels_on_service/model/customer_model.dart';
+import 'package:wheels_on_service/utils/api.dart';
 import 'package:wheels_on_service/views/components/my_button.dart';
-import 'package:wheels_on_service/views/pages/homepageTabs/home_page.dart';
 
 class ProfileComponent extends StatelessWidget {
   final Customer customer;
@@ -13,7 +14,7 @@ class ProfileComponent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 600,
+      height: 700,
       width: 500,
       child: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -34,19 +35,26 @@ class ProfileComponent extends StatelessWidget {
               padding: const EdgeInsets.all(16.0),
               child: Column(
                 children: [
-                  //Expanded(child: Image.network("$baseUrl/${service.image}")),
-                  const SizedBox(
-                    width: 200,
-                    height: 200,
-                    child: Image(
-                      image: AssetImage('assets/images/user_profile.jpg'),
+                  Container(
+                    width: 180,
+                    height: 180,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(300.0),
+                      color: Colors.grey[180],
+                    ),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(300.0),
+                      child: Image.network(
+                        "$baseUrl/${customer.image}",
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
                   const SizedBox(
-                    height: 20,
+                    height: 18,
                   ),
                   Container(
-                    height: 50,
+                    height: 60,
                     width: 700,
                     decoration: BoxDecoration(
                       color: const Color(0xffdedede),
@@ -76,7 +84,7 @@ class ProfileComponent extends StatelessWidget {
                     child: Center(
                       child: Text("Contact Number:  ${customer.phone}",
                           style: const TextStyle(
-                              fontSize: 20, fontWeight: FontWeight.bold)),
+                              fontSize: 18, fontWeight: FontWeight.bold)),
                     ),
                   ),
                   Container(
@@ -91,7 +99,7 @@ class ProfileComponent extends StatelessWidget {
                     child: Center(
                       child: Text("Email:  ${customer.email}",
                           style: const TextStyle(
-                              fontSize: 20, fontWeight: FontWeight.bold)),
+                              fontSize: 18, fontWeight: FontWeight.bold)),
                     ),
                   ),
                   Container(
@@ -106,16 +114,41 @@ class ProfileComponent extends StatelessWidget {
                     child: Center(
                       child: Text("Address:  ${customer.address}",
                           style: const TextStyle(
-                              fontSize: 20, fontWeight: FontWeight.bold)),
+                              fontSize: 18, fontWeight: FontWeight.bold)),
+                    ),
+                  ),
+                  Container(
+                    height: 50,
+                    width: 700,
+                    decoration: BoxDecoration(
+                      color: const Color(0xffdedede),
+                      border: Border.all(
+                          width: 1.0,
+                          color: Color.fromARGB(255, 169, 169, 169)),
+                    ),
+                    child: Center(
+                      child: Text("Username:  ${customer.userName}",
+                          style: const TextStyle(
+                              fontSize: 18, fontWeight: FontWeight.bold)),
+                    ),
+                  ),
+                  const SizedBox(height: 18),
+                  SizedBox(
+                    width: 190,
+                    child: MyButton(
+                      buttonName: 'Edit Profile',
+                      onTap: () => Get.to(EditProfileForm(
+                        customer: customer,
+                      )),
                     ),
                   ),
                   SizedBox(
-                    width: 200,
+                    width: 190,
                     child: MyButton(
                       buttonName: 'Logout',
                       onTap: () => logout(),
                     ),
-                  ),
+                  )
                 ],
               ),
             )),

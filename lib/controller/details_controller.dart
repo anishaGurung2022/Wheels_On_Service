@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:wheels_on_service/model/customer_model.dart';
 import 'package:wheels_on_service/utils/api.dart';
 import 'package:wheels_on_service/utils/constants.dart';
@@ -52,6 +53,38 @@ class CustomerController extends GetxController {
       }
     } else {
       print("Error loading details");
+    }
+  }
+
+  updateProfile(data, PickedFile? file) async {
+    //loading.value = true;
+    data['token'] = (await authService.getToken());
+    var url = Uri.parse(EDIT_PROFILE_API);
+
+    //multipart that takes file
+    var request = http.MultipartRequest('POST', url);
+    request.fields.addAll(data);
+    print(data);
+    if (file != null) {
+      var pic = await http.MultipartFile.fromPath('image', file.path);
+      request.files.add(pic);
+    }
+    var response = await request.send();
+    if (response.statusCode == 200) {
+      var decodedResponse = jsonDecode(await response.stream.bytesToString());
+      if (decodedResponse['success']) {
+        Get.back();
+        var token_ = await authService.getToken();
+        getDetails(token_);
+        showMessage(message: decodedResponse["message"], title: 'Success');
+      } else {
+        showMessage(
+            message: decodedResponse["message"],
+            isSuccess: false,
+            title: 'Error');
+      }
+    } else {
+      print('Request failed with status: ${response.statusCode}.');
     }
   }
 }

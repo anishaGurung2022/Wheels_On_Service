@@ -2,10 +2,8 @@ import 'dart:convert';
 import 'package:get/get.dart';
 import 'package:localstorage/localstorage.dart';
 import 'package:wheels_on_service/model/service_model.dart';
-import 'package:wheels_on_service/utils/api.dart';
 import 'package:wheels_on_service/utils/constants.dart';
 import 'package:wheels_on_service/utils/shared_prefs.dart';
-import 'package:http/http.dart' as http;
 
 class CartController extends GetxController {
   AuthService authService = AuthService();
@@ -14,6 +12,20 @@ class CartController extends GetxController {
   var cart = {}.obs;
   var totalCosting = 0.0.obs;
   final storage = LocalStorage('cart');
+
+  @override
+  void onInit() {
+    super.onInit();
+    storage.ready.then((value) {
+      if (storage.getItem('cart') != null) {
+        var cartMap = jsonDecode(storage.getItem('cart'));
+        cart.clear();
+        cartMap.forEach((key, value) {
+          cart[key] = Services.fromJson(value);
+        });
+      }
+    });
+  }
 
   void add({required Services services}) {
     cart[services.id] = jsonEncode(Services(
@@ -27,14 +39,10 @@ class CartController extends GetxController {
         quantity: quantity.value));
     quantity.value = 1;
     totalCosting.value = getTotal();
-    //storage.setItem("cart", jsonEncode(cart));
-
+    storage.setItem("cart", jsonEncode(cart));
     Get.back();
-    showMessage(message: "${services.name} added to cart", title: 'Success');
-  }
-
-  void increase() {
-    quantity.value++;
+    showMessage(
+        message: "${services.name} added to bookings", title: 'Success');
   }
 
   getTotal() {
@@ -47,42 +55,16 @@ class CartController extends GetxController {
     return total;
   }
 
-  void remove({required String id}) {
-    cart.remove(id);
-    totalCosting.value = getTotal();
+  remove(Services services) {
+    cart.remove(services.id);
+    storage.setItem("cart", jsonEncode(cart));
+    getTotal();
+  }
+
+  clearCart() {
+    cart.clear();
+    storage.setItem("cart", jsonEncode(cart));
+    getTotal();
     update();
-    showMessage(message: "Item removed from cart", title: 'Success');
   }
-
-  void decrease() {
-    if (quantity.value != 1) {
-      quantity.value--;
-    }
-  }
-
-  // Future<void> placeOrder({required String token}) async {
-  //   var token = await authService.getToken();
-  //   var booking_details = cart.values
-  //       .map((e) => jsonEncode({
-  //             "services_id": jsonDecode(e)["id"],
-  //             "serviceCenter": jsonDecode(e)["serviceCenter"]
-  //           }))
-  //       .toList();
-  //   var data = {
-  //     "token": token.toString(),
-  //     "booking_details": jsonEncode(booking_details),
-  //     "total": totalCosting.value.toString(),
-  //   };
-  //   isLoading.value = true;
-  //   print(data);
-  //   var response = await http.post(Uri.parse(ADD_BOOKING_API), body: data);
-  //   isLoading.value = false;
-
-  //   var decodedResponse = await json.decode(response.body);
-  //   if (decodedResponse["success"]) {
-  //     Get.snackbar("Success", decodedResponse["message"]);
-  //   } else {
-  //     Get.snackbar("Failed", decodedResponse["message"]);
-  //   }
-  // }
 }
