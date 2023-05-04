@@ -37,9 +37,7 @@ class BookingController extends GetxController {
         print(bookingID.value);
         Get.to(() => KhaltiExampleApp());
         showMessage(
-            message: jsonResponse["message"],
-            isSuccess: true,
-            title: 'Success');
+            message: "Service Booked", isSuccess: true, title: 'Success');
       } else {
         showMessage(
             message: jsonResponse["message"], isSuccess: false, title: 'Error');
@@ -56,10 +54,10 @@ class BookingController extends GetxController {
       print(data);
       var jsonResponse = json.decode(response.body) as Map<String, dynamic>;
       if (jsonResponse["success"]) {
-        showMessage(
-            message: jsonResponse["message"],
-            isSuccess: true,
-            title: 'Success');
+        // showMessage(
+        //     message: jsonResponse["message"],
+        //     isSuccess: true,
+        //     title: 'Success');
       } else {
         showMessage(
             message: jsonResponse["message"], isSuccess: false, title: 'Error');

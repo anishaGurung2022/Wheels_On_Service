@@ -1,4 +1,4 @@
-const baseUrl = "http://192.168.1.7/wheelsOnService_api";
+const baseUrl = "http://172.20.10.3/wheelsOnService_api";
 
 const LOGIN_API = "$baseUrl/login.php";
 const SIGNUP_API = "$baseUrl/signup.php";

@@ -51,7 +51,7 @@ class CartPage extends StatelessWidget {
                     Get.bottomSheet(BookNowBottomSheet());
                   },
                   //width: Get.width,
-                  buttonName: "Pay ${cartController.totalCosting}",
+                  buttonName: "Pay ${cartController.totalCosting.value}",
                 )),
           )
         ],
@@ -60,85 +60,68 @@ class CartPage extends StatelessWidget {
   }
 
   Widget cartTile({required Services service}) {
-    return Slidable(
-      endActionPane: ActionPane(
-        motion: const ScrollMotion(),
-        children: [
-          SlidableAction(
-            onPressed: (context) {
-              cartController.remove(service);
-              CartController();
-            },
-            backgroundColor: const Color(0xFF0392CF),
-            foregroundColor: Colors.white,
-            icon: Icons.delete,
-            label: 'Delete',
-          ),
-        ],
+    return Container(
+      width: Get.width,
+      height: (Get.width / 3),
+      decoration: const BoxDecoration(
+        color: Colors.white,
       ),
-      child: Container(
-        width: Get.width,
-        height: (Get.width / 3),
-        decoration: const BoxDecoration(
-          color: Colors.white,
-        ),
-        child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Container(
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: const BorderRadius.all(Radius.circular(20.0)),
-                  border: Border.all(color: Colors.black, width: 0.5),
-                  boxShadow: const [BoxShadow()],
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Image.network("$baseUrl/${service.image}", height: 65),
-                    const SizedBox(
-                      width: 5,
+      child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: const BorderRadius.all(Radius.circular(20.0)),
+                border: Border.all(color: Colors.black, width: 0.5),
+                boxShadow: const [BoxShadow()],
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Image.network("$baseUrl/${service.image}", height: 65),
+                  const SizedBox(
+                    width: 5,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      children: [
+                        const SizedBox(
+                          height: 30,
+                        ),
+                        Row(
+                          children: [
+                            const Text(
+                              "Service Name:",
+                              style: TextStyle(
+                                  fontSize: 14, fontWeight: FontWeight.bold),
+                            ),
+                            Text(
+                              service.name!,
+                              style: const TextStyle(
+                                  fontSize: 14, fontWeight: FontWeight.bold),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            const Text(
+                              "Price",
+                              style: TextStyle(
+                                  fontSize: 14, fontWeight: FontWeight.bold),
+                            ),
+                            Text(
+                              service.price!,
+                              style: const TextStyle(
+                                  fontSize: 14, fontWeight: FontWeight.bold),
+                            ),
+                          ],
+                        ),
+                      ],
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        children: [
-                          const SizedBox(
-                            height: 30,
-                          ),
-                          Row(
-                            children: [
-                              const Text(
-                                "Service Name:",
-                                style: TextStyle(
-                                    fontSize: 14, fontWeight: FontWeight.bold),
-                              ),
-                              Text(
-                                service.name!,
-                                style: const TextStyle(
-                                    fontSize: 14, fontWeight: FontWeight.bold),
-                              ),
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              const Text(
-                                "Price",
-                                style: TextStyle(
-                                    fontSize: 14, fontWeight: FontWeight.bold),
-                              ),
-                              Text(
-                                service.price!,
-                                style: const TextStyle(
-                                    fontSize: 14, fontWeight: FontWeight.bold),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ))),
-      ),
+                  ),
+                ],
+              ))),
     );
   }
 }

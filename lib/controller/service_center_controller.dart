@@ -46,19 +46,27 @@ class ServiceCenterController extends GetxController {
     var response = await http.post(url, body: {"id": serviceCenterID});
     loading.value = false;
     if (response.statusCode == 200) {
-      var jsonResponse = jsonDecode(response.body) as Map<String, dynamic>;
-      if (jsonResponse["success"]) {
-        var responseData = jsonResponse['data'];
-        print(responseData);
-        for (var i = 0; i < responseData.length; i++) {
-          serviceCenterServices
-              .add(ServiceCenterServices.fromJson(responseData[i]));
+      try {
+        var jsonResponse = jsonDecode(response.body) as Map<String, dynamic>;
+        if (jsonResponse["success"]) {
+          var responseData = jsonResponse['data'];
+          print(responseData);
+          for (var i = 0; i < responseData.length; i++) {
+            serviceCenterServices
+                .add(ServiceCenterServices.fromJson(responseData[i]));
+          }
+        } else {
+          showMessage(
+              message: jsonResponse["message"],
+              isSuccess: false,
+              title: 'Success');
         }
-      } else {
+      } catch (e) {
+        print('Error decoding JSON response: $e');
         showMessage(
-            message: jsonResponse["message"],
+            message: 'An error occurred while processing the response',
             isSuccess: false,
-            title: 'Success');
+            title: 'Error');
       }
     } else {
       print('Request failed with status: ${response.statusCode}.');

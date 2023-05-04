@@ -32,7 +32,7 @@ class CustomerController extends GetxController {
             details.value = (jsonResponse["data"] as List)
                 .map((e) => Customer.fromJson(e))
                 .toList();
-            showMessage(title: "Success", message: jsonResponse["message"]);
+            //showMessage(title: "Success", message: jsonResponse["message"]);
           } else {
             showMessage(
                 title: "Error",
@@ -76,7 +76,7 @@ class CustomerController extends GetxController {
         Get.back();
         var token_ = await authService.getToken();
         getDetails(token_);
-        showMessage(message: decodedResponse["message"], title: 'Success');
+        //showMessage(message: decodedResponse["message"], title: 'Success');
       } else {
         showMessage(
             message: decodedResponse["message"],

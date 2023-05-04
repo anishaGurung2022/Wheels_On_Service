@@ -13,36 +13,29 @@ class CartController extends GetxController {
   var totalCosting = 0.0.obs;
   final storage = LocalStorage('cart');
 
-  @override
-  void onInit() {
-    super.onInit();
-    storage.ready.then((value) {
-      if (storage.getItem('cart') != null) {
-        var cartMap = jsonDecode(storage.getItem('cart'));
-        cart.clear();
-        cartMap.forEach((key, value) {
-          cart[key] = Services.fromJson(value);
-        });
-      }
-    });
-  }
-
   void add({required Services services}) {
-    cart[services.id] = jsonEncode(Services(
-        id: services.id,
-        name: services.name,
-        description: services.description,
-        price: services.price,
-        serviceCenter: services.serviceCenter,
-        category: services.category,
-        image: services.image,
-        quantity: quantity.value));
-    quantity.value = 1;
-    totalCosting.value = getTotal();
-    storage.setItem("cart", jsonEncode(cart));
-    Get.back();
-    showMessage(
-        message: "${services.name} added to bookings", title: 'Success');
+    if (cart.containsKey(services.id)) {
+      // Service already in cart, handle accordingly (e.g. show error message)
+      showMessage(
+          title: "Cart",
+          message: "This service is already in cart.",
+          isSuccess: false);
+    } else {
+      cart[services.id] = jsonEncode(Services(
+          id: services.id,
+          name: services.name,
+          description: services.description,
+          price: services.price,
+          serviceCenter: services.serviceCenter,
+          category: services.category,
+          image: services.image,
+          quantity: quantity.value));
+      quantity.value = 1;
+      totalCosting.value = getTotal();
+      Get.back();
+      showMessage(
+          message: "${services.name} added to bookings", title: 'Success');
+    }
   }
 
   getTotal() {
@@ -53,18 +46,5 @@ class CartController extends GetxController {
       total = total + lineTotal;
     }
     return total;
-  }
-
-  remove(Services services) {
-    cart.remove(services.id);
-    storage.setItem("cart", jsonEncode(cart));
-    getTotal();
-  }
-
-  clearCart() {
-    cart.clear();
-    storage.setItem("cart", jsonEncode(cart));
-    getTotal();
-    update();
   }
 }

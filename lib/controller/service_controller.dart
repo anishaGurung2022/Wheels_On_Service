@@ -24,15 +24,21 @@ class ServiceController extends GetxController {
     loading.value = false;
     if (response.statusCode == 200) {
       var jsonResponse = jsonDecode(response.body) as Map<String, dynamic>;
-      if (jsonResponse["success"]) {
-        var responseData = jsonResponse['data'];
-        for (var i = 0; i < responseData.length; i++) {
-          services.add(Services.fromJson(responseData[i]));
+      try {
+        if (jsonResponse["success"]) {
+          var responseData = jsonResponse['data'];
+          for (var i = 0; i < responseData.length; i++) {
+            services.add(Services.fromJson(responseData[i]));
+          }
+          //showMessage(title: "Success", message: jsonResponse["message"]);
+        } else {
+          showMessage(
+              title: "Error",
+              message: jsonResponse["message"],
+              isSuccess: false);
         }
-        //showMessage(title: "Success", message: jsonResponse["message"]);
-      } else {
-        showMessage(
-            title: "Error", message: jsonResponse["message"], isSuccess: false);
+      } catch (e) {
+        print('Error decoding JSON: $e');
       }
     }
   }

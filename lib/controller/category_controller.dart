@@ -22,25 +22,33 @@ class CategoryController extends GetxController {
 
   //GET categories from database
   get() async {
-    var url = Uri.parse(GET_CATEGORIES_API);
-    var response = await http.get(url);
-    if (response.statusCode == 200) {
-      var jsonResponse = jsonDecode(response.body) as Map<String, dynamic>;
-      if (jsonResponse["success"]) {
-        categories.value = (jsonResponse["data"] as List)
-            .map((e) => Category.fromJson(e))
-            .toList();
-
-        // var responseData = jsonResponse['data'];
-        // for (var i = 0; i < responseData.length; i++) {
-        //   categories.add(Category.fromJson(responseData[i]));
-        // }
-        //Get.back();
-        //showMessage(title: "Success", message: jsonResponse["message"]);
+    try {
+      var url = Uri.parse(GET_CATEGORIES_API);
+      var response = await http.get(url);
+      if (response.statusCode == 200) {
+        var jsonResponse = jsonDecode(response.body) as Map<String, dynamic>;
+        if (jsonResponse != null) {
+          if (jsonResponse["success"]) {
+            categories.value = (jsonResponse["data"] as List)
+                .map((e) => Category.fromJson(e))
+                .toList();
+          } else {
+            showMessage(
+                title: "Error",
+                message: jsonResponse["message"],
+                isSuccess: false);
+          }
+        } else {
+          throw Exception("JSON response is null");
+        }
       } else {
-        showMessage(
-            title: "Error", message: jsonResponse["message"], isSuccess: false);
+        throw Exception("Failed to load data: ${response.statusCode}");
       }
+    } catch (e) {
+      // Handle the exception here
+      print("Error: $e");
+      showMessage(
+          title: "Error", message: "Failed to load data: $e", isSuccess: false);
     }
   }
 }

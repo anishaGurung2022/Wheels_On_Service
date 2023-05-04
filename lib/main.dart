@@ -7,7 +7,6 @@ import 'package:wheels_on_service/controller/category_controller.dart';
 import 'package:wheels_on_service/controller/city_controller.dart';
 import 'package:wheels_on_service/controller/service_center_controller.dart';
 import 'package:wheels_on_service/controller/service_controller.dart';
-import 'package:wheels_on_service/views/pages/loader.dart';
 import 'package:wheels_on_service/views/pages/login_page.dart';
 
 Future<void> main() async {
@@ -21,9 +20,8 @@ Future<void> main() async {
   Get.put(CitiesController());
   Get.put(ServiceController());
   Get.put(ServiceCenterController());
-  Get.put(CartController());
-  runApp(const GetMaterialApp(
-    home: Loader(),
+  runApp(GetMaterialApp(
+    home: LoginPage(),
     debugShowCheckedModeBanner: false,
   ));
 }

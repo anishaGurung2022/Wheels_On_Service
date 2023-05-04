@@ -154,7 +154,8 @@ class _WalletPaymentState extends State<WalletPayment> {
                     "payment_date": DateTime.now().toString()
                   };
                   bookingController.addPayment(jsonEncode(data));
-                  cartController.clearCart;
+                  cartController.cart.clear();
+                  cartController.totalCosting.value = 0.0;
                   Get.offAll(const LandingPage());
                   showDialog(
                       context: (context),
@@ -164,8 +165,6 @@ class _WalletPaymentState extends State<WalletPayment> {
                             "Payment Successfull",
                             style: TextStyle(color: primaryColor),
                           ),
-
-                          //content: Text('Verification Token: ${model.token}'),
                         );
                       });
                   debugPrint(model.toString());
